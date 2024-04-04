@@ -4,6 +4,7 @@ import {map, Observable} from "rxjs";
 import {Product} from "./product.model";
 import {Order} from "./order.model";
 import {HttpHeaders} from '@angular/common/http';
+import {PlatformService} from "../platform.service";
 
 const PROTOCOL = "http";
 const PORT = 3500;
@@ -13,8 +14,10 @@ export class RestDataSource {
   baseUrl: string;
   auth_token?: string;
 
-  constructor(private http: HttpClient) {
-    this.baseUrl = `${PROTOCOL}://${location.hostname}:${PORT}/`;
+  constructor(private http: HttpClient, ps: PlatformService) {
+    this.baseUrl = ps.isServer
+      ? `http://localhost:${PORT}/`
+      : `${PROTOCOL}://${location.hostname}:${PORT}/`;
   }
 
   get products(): Observable<Product[]> {

@@ -8,6 +8,7 @@ import {CartDetailComponent} from "./store/cartDetail.component";
 import {RouterModule} from "@angular/router";
 import {StoreFirstGuard} from "./storeFirst.guard";
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {PlatformService} from './platform.service';
 
 @NgModule({
   declarations: [AppComponent],
@@ -36,7 +37,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
       initialNavigation: 'enabledBlocking'
     }),
     BrowserAnimationsModule],
-  providers: [StoreFirstGuard, provideClientHydration()],
+  providers: [StoreFirstGuard, provideClientHydration(), PlatformService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
